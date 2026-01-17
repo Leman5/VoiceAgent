@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+:root {
+  /* Core Palette - Sophisticated Dark Mode */
+  --background: #000000;
+  --surface: #0A0A0A;
+  --surface-highlight: #121212;
+
+  /* Functional Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #52525B;
+
+  /* Accents */
+  --accent: #6366F1;
+  /* Indigo */
+  --accent-glow: rgba(99, 102, 241, 0.5);
+
+  --emerald: #10B981;
+  /* Success/Growth */
+  --amber: #F59E0B;
+  /* Warning/Attention */
+  --rose: #F43F5E;
+  /* Error/Destructive */
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  /* Fluid Spacing */
+  --spacing-fluid-sm: clamp(0.5rem, 1vw, 0.75rem);
+  --spacing-fluid-md: clamp(1rem, 2vw, 1.5rem);
+  --spacing-fluid-lg: clamp(2rem, 4vw, 3rem);
+}
+
+@theme inline {
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-highlight: var(--surface-highlight);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-accent: var(--accent);
+  --color-emerald: var(--emerald);
+  --color-amber: var(--amber);
+  --color-rose: var(--rose);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-slide-up: slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-glow: glow 2s ease-in-out infinite;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 5px var(--accent-glow), 0 0 10px var(--accent-glow);
+    }
+
+    50% {
+      box-shadow: 0 0 20px var(--accent-glow), 0 0 30px var(--accent-glow);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Global Reset & Base Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: white;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  /* Modern font features */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-highlight);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Utilities */
+@utility glass {
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+@utility glass-hover {
+  @apply transition-colors duration-300;
+
+  &:hover {
+    background: rgba(10, 10, 10, 0.7);
+    border-color: var(--border-hover);
+  }
+}
+
+@utility bentogrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+@utility text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, white, #94a3b8);
+}
+
+@utility text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #818cf8, #6366f1);
+}
+
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Remove default focus ring and add custom one */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(0, 0, 0, 0.5);
+}
