@@ -1,3 +1,13 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Virtual environment
+myenv/
 # dependencies
 /node_modules
 /.pnp
